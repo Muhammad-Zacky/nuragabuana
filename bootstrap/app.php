@@ -16,7 +16,14 @@ return Application::configure(basePath: dirname(__DIR__))
             \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
         ]);
 
-        //
+        /**
+         * MENDAFTARKAN ALIAS MIDDLEWARE
+         * Dengan mendaftarkan alias 'admin', kita bisa memanggil middleware ini
+         * di routes/web.php dengan string biasa, bukan fungsi Closure.
+         */
+        $middleware->alias([
+            'admin' => \App\Http\Middleware\IsAdmin::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
