@@ -15,6 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+
+            // Tambahan untuk kebutuhan sistem Nuragabuana
+            $table->string('phone')->nullable(); // Nomor HP/WA Relawan
+            $table->enum('role', ['admin', 'relawan'])->default('relawan'); // Hak akses default
+
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
