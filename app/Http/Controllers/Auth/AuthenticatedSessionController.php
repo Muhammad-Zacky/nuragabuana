@@ -33,6 +33,18 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        // Ambil data user yang baru saja login
+        $user = Auth::user();
+
+        /**
+         * LOGIKA REDIRECT BERDASARKAN ROLE
+         * Jika role adalah admin, arahkan ke halaman manajemen event admin.
+         * Jika selain admin (relawan), arahkan ke dashboard relawan.
+         */
+        if ($user->role === 'admin') {
+            return redirect()->intended(route('admin.events.index'));
+        }
+
         return redirect()->intended(route('dashboard', absolute: false));
     }
 
